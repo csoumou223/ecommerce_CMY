@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block body %}
+    <h1>Panier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nom du produit</th>
+                <th>Quantité commandée</th>
+                <th>Prix</th>
+                <th>Montant</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+        {% for panier in paniers %}
+            <tr>
+                <td>{{ contenuPanier.produit.nom }}</td>
+                <td>{{ contenuPanier.produit.quantite }}</td>
+                <td>{{ contenuPanier.produit.prix }}</td>
+                <td></td>
+                <td>
+                    <a href="">Supprimer le produit</a>
+                </td>
+
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun contenu</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <h1>Montant total du panier :</h1>
+    {# <p>{{ montant_total_panier }}</p> #}
+
+    <h1>Etat du panier :</h1>
+    {# <p>{{ panier.etat ? 'Yes' : 'No' }}</p> #}
+
+    <a href="">Acheter le panier</a>
+    
+{% endblock %}

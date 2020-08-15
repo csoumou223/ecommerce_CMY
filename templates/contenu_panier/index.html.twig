@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContenuPanier{% endblock %}
+
+{% block body %}
+    <h1>ContenuPanier</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Quantite</th>
+                <th>Date d'ajout</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for contenu_panier in contenu_paniers %}
+            <tr>
+                <td>{{ contenu_panier.id }}</td>
+                <td>{{ contenu_panier.quantite }}</td>
+                <td>{{ contenu_panier.dateAjout ? contenu_panier.dateAjout|date('Y-m-d') : '' }}</td>
+                <td>
+                    <a href="{{ path('contenu_panier_show', {'id': contenu_panier.id}) }}">Voir</a>
+                    <a href="{{ path('contenu_panier_edit', {'id': contenu_panier.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Aucun contenu</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('contenu_panier_new') }}">Create new</a>
+{% endblock %}

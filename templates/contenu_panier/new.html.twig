@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ContenuPanier | Création{% endblock %}
+
+{% block body %}
+    <h1>Creation d'un ContenuPanier</h1>
+
+    {{ include('contenu_panier/_form.html.twig') }}
+
+    <a href="{{ path('contenu_panier_index') }}">Retour à la liste</a>
+{% endblock %}
