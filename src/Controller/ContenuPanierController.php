@@ -62,6 +62,8 @@ class ContenuPanierController extends AbstractController
             'contenu_panier' => $contenuPanier,
             'form' => $form->createView(),
         ]);
+
+        $this->addFlash('success', $translator->trans('Produit ajouté au panier !'));
     }
 
     /**

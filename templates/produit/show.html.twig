@@ -7,56 +7,81 @@
         <h1>Fiche du produit</h1>
     </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                
-                
-                <td> <img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"></td>
-                <a href="{{ path('contenu_panier_new', {'id':produit.id})}}" class="btn btn-success float-right">
-                        <i class="fas fa-shopping-cart mr-1"></i>
-                        Ajouter
+    <div class="row">
+
+        <div class="col-4">
+            <p><img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"></p>
+        </div>
+
+        <div class="col-4">
+            <table class="table">
+                <tbody>
+                    <tr>
+                        <th>Id</th>
+                        <td>{{ produit.id }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ produit.nom }}</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ produit.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prix</th>
+                        <td>{{ produit.prix }}</td>
+                    </tr>
+                    <tr>
+                        <th>Stock</th>
+                        <td>{{ produit.stock }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-4">
+            {# On peut ajouter un produit au panier seulement si on est connecté #}
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a href="{{ path('contenu_panier_new', {'id':produit.id})}}" class="btn btn-success align-middle">
+                        <i class="fas fa-shopping-cart ml-1"></i>
+                        Ajouter au panier
                 </a>
-            </tr>
-            <tr>
-                <th>Id</th>
-                <td>{{ produit.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ produit.nom }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ produit.description }}</td>
-            </tr>
-            <tr>
-                <th>Prix</th>
-                <td>{{ produit.prix }}</td>
-            </tr>
-            <tr>
-                <th>Stock</th>
-                <td>{{ produit.stock }}</td>
-            </tr>
+            {% endif %}
+
+            <br><br>
+
+            {# On peut modifier un produit seulement si on est ADMIN #}
+            {% if is_granted('ROLE_ADMIN') %}
+                <button type="btn" class="btn btn-outline-warning"><a style="text-decoration: none" class="text-warning" href="{{ path('produit_edit', {'id': produit.id}) }}">Modifier</a></button>
+            {% endif %}
+
+            <br><br>
             
-        </tbody>
-    </table>
+            {# On peut supprimer un produit seulement si on est ADMIN #}
+            {% if is_granted('ROLE_ADMIN') %}
+                {{ include('produit/_delete_form.html.twig') }}
+            {% endif %}
+    
+        </div>
 
-    <a href="{{ path('produit_index') }}">Retour à la liste</a>
+    </div>
+    
 
-    {# On peut ajouter un produit au panier seulement si on est connecté #}
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <a href="">Ajouter au panier</a>
-    {% endif %}
 
-    {# On peut modifier un produit seulement si on est ADMIN #}
-    {% if is_granted('ROLE_ADMIN') %}
-        <a href="{{ path('produit_edit', {'id': produit.id}) }}">Modifier</a>
-    {% endif %}
+    
 
-    {# On peut supprimer un produit seulement si on est ADMIN #}
-    {% if is_granted('ROLE_ADMIN') %}
-        {{ include('produit/_delete_form.html.twig') }}
-    {% endif %}
+    
+
+    <br>
+
+    
+
+    <br>
+
+    <p>
+    <a href="{{ path('produit_index') }}">Retour à la liste des produits</a>
+    </p>
     
 {% endblock %}

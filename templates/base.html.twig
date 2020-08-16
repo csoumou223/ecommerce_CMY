@@ -9,40 +9,6 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-{# 
-        <nav>
-            <ul>
-                <li><a href="{{path('produit_index')}}">Accueil</a></li>
-                {% if app.user is null %}
-                    <li><a href="{{path('app_login')}}">Login</a></li>
-                    <li><a href="{{path('app_register')}}">Inscription</a></li>
-                    {# <li><a href="{{ path('user_show', {'id': user.id}) }}">Mon compte perso</a></li> #}
-                {# {% else %} #}
-                    {# {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{path('admin')}}">Admin</a></li>
-                    {% endif %}
-                    <li><a href="{{ path('panier_index') }}">Mon panier</a></li>
-                    <li><a href="{{ path('user_index') }}">Mon compte</a></li>
-                    <li><a href="{{path('app_logout')}}">Logout</a></li>
-                {% endif %}
-            </ul>
-        </nav> #} 
-
-
-
-        <nav>
-            <ul>
-                {% if app.user is null %}
-                    <li><a href="{{path('app_login')}}">Login</a></li>
-                    <li><a href="{{path('app_register')}}">Inscription</a></li>
-                {% else %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{path('admin')}}">Admin</a></li>
-                    {% endif %}
-                    <li><a href="{{path('app_logout')}}">Logout</a></li>
-                {% endif %}
-            </ul>
-        </nav>
 
         {% for type, messages in app.flashes %}
             {% for message in messages %}
@@ -50,7 +16,26 @@
             {% endfor %}
         {% endfor %}
 
-        <div class="container">
+        <nav class="navbar navbar-white bg-white">
+       
+            <ul class="navbar-nav">
+                <li class="nav-item"><a href="{{path('produit_index')}}">Accueil</a></li>
+                {% if app.user is null %}
+                    <li><a href="{{path('app_login')}}">Login</a></li>
+                    <li><a href="{{path('app_register')}}">Inscription</a></li>
+                    
+                {% else %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{path('admin')}}">Admin</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('user_index') }}">Mon compte</a></li>
+                    <li><a href="{{path('app_logout')}}">Logout</a></li>
+                {% endif %}
+            </ul>
+    
+        </nav>
+
+        <div class="container p-3">
             {% block body %}{% endblock %}
         </div>
 

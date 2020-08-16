@@ -65,7 +65,7 @@ class ProduitController extends AbstractController
             $em->persist($produit);
             $em->flush();
 
-            $this->addFlash('success', $translator->trans('produit.ajoute'));
+            $this->addFlash('success', $translator->trans('Produit ajouté !'));
         }
 
         $produits = $em->getRepository(Produit::class)->findAll();
@@ -90,7 +90,7 @@ class ProduitController extends AbstractController
 
 
     /**
-     * @Route("/produit/{id}/edit", name="produit_edit", methods={"GET","POST"})
+     * @Route("/produit/edit/{id}", name="produit_edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Produit $produit): Response
     {
@@ -101,16 +101,19 @@ class ProduitController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('produit_index');
+
+            $this->addFlash('warning', 'Produit modifié !');
         }
 
         return $this->render('produit/edit.html.twig', [
             'produit' => $produit,
             'form' => $form->createView(),
         ]);
+
     }
 
     /**
-     * @Route("/produit/{id}", name="produit_delete", methods={"DELETE"})
+     * @Route("/produit/delete/{id}", name="produit_delete", methods={"DELETE"})
      */
     public function delete(Request $request, Produit $produit): Response
     {
@@ -118,8 +121,12 @@ class ProduitController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($produit);
             $entityManager->flush();
+
+            $this->addFlash('danger', 'Produit supprimé !');
         }
 
         return $this->redirectToRoute('produit_index');
+
+        
     }
 }

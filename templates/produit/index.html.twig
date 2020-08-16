@@ -3,31 +3,36 @@
 {% block title %}Produits{% endblock %}
 
 {% block body %}
-    <div class="bg-light p-3">
-        <h1>Les produits</h1>
+    
+    {# On peut ajouter un produit seulement si on est ADMIN #}
+
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="col-4 float-right">
+            <a href="{{ path('produit_new') }}" class="btn btn-primary float-right">
+                    <i class="fas fa-shopping-cart ml-1"></i>
+                    + Ajouter un produit
+            </a>
+        </div>
+    {% endif %}
+
+    <br>
+    
+    <div class="bg-white p-3">
+        <h1 class="text-center">Voici les produits de CMY Shop !</h1>
     </div>
+    
     <div class="row">
         {% for produit in produits %}
-                    <div class="col-3 mt-3">
-                        <div class="border border-dark rounded p-1 clearfix">
-                                
-                            <h2><a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a>
-                            -
-                            {{produit.prix}}
-                            $
-                            </h2>
-                            <img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"> 
-                         </div>           
-                    </div>
+            <div class="col-4 mt-3">
+                <div class="border border-dark rounded p-1 clearfix"> 
+                    <p><img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"></p>
+                    <h3><a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a></h3>
+                    <h4>{{produit.prix}} €</h4>                     
+                </div>           
+            </div>
         {% else %}      
                 <div> colspan="7">Aucun produit</div>    
         {% endfor %}
-    </div>
-    
-    
-    {# On peut ajouter un produit seulement si on est ADMIN #}
-    {% if is_granted('ROLE_USER') %}
-        <a href="{{ path('produit_new') }}">Ajouter un produit</a>
-    {% endif %}
+    </div>   
 
 {% endblock %}

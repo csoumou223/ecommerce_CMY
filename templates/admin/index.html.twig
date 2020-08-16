@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AdminController!{% endblock %}
+{% block title %}Portail Admin{% endblock %}
 
 {% block body %}
 <h1>Utilisateurs</h1>
@@ -11,7 +11,7 @@
             <tr>
                 <th>Email</th>
                 <th>Roles</th>
-                <th>Action</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +20,9 @@
                     <td>{{user.email}}</td>
                     <td>{{dump(user.roles)}}</td>
                     <td>
-                        <a href="{{ path('editRole', {'id':user.id}) }}">EditRole</a>
+                        <a href="{{ path('editRole', {'id':user.id}) }}">Passer en Admin</a>
+                        <br>
+                        <a href="{{ path('user_edit', {'id':user.id}) }}">Modifier</a>
                     </td>
                 </tr>
             {% endfor %}
