@@ -18,11 +18,13 @@
         {% for contenu_panier in contenu_paniers %}
             <tr>
                 <td>{{ contenu_panier.id }}</td>
+                
                 <td>{{ contenu_panier.quantite }}</td>
                 <td>{{ contenu_panier.dateAjout ? contenu_panier.dateAjout|date('Y-m-d') : '' }}</td>
                 <td>
-                    <a href="{{ path('contenu_panier_show', {'id': contenu_panier.id}) }}">Voir</a>
-                    <a href="{{ path('contenu_panier_edit', {'id': contenu_panier.id}) }}">Modifier</a>
+                    
+                        <a href="{{ path('contenu_panier_delete', {'id':contenu_panier.id}) }}" title="Supprimer le produit" class="btn btn-danger">X</a>
+                    
                 </td>
             </tr>
         {% else %}

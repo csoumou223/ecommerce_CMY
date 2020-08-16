@@ -5,13 +5,17 @@ namespace App\Controller;
 use App\Entity\ContenuPanier;
 use App\Form\ContenuPanierType;
 use App\Repository\ContenuPanierRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+
+
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @Route("/contenu-panier")
+ * @Route("/contenu_panier")
  */
 class ContenuPanierController extends AbstractController
 {
@@ -24,6 +28,18 @@ class ContenuPanierController extends AbstractController
             'contenu_paniers' => $contenuPanierRepository->findAll(),
         ]);
     }
+    // public function index(SessionInterface $session,  $productRepository)
+    // {
+        
+    //     $contenu = $session ->get('contenu',[]);
+    //     $contenuData=[];
+    //     foreach($contenu  as $id =>$quantity){
+    //         $contenuData[]=[
+    //             'produit' =>$productRepository->find($id),
+    //             'quantity' => $quantity
+    //         ]
+    //     }
+    
 
     /**
      * @Route("/new", name="contenu_panier_new", methods={"GET","POST"})
@@ -57,6 +73,22 @@ class ContenuPanierController extends AbstractController
             'contenu_panier' => $contenuPanier,
         ]);
     }
+    // public function add($id, Session $session)
+    // {
+
+    //     $contenu = $session ->get('contenu',[]);
+    //     if(!empty($contenu[$id])){
+    //         $contenu[$id]++;
+    //     }else{
+    //         $contenu[$id]=1;
+    //     }
+
+        
+
+    //     $session->set('contenu',$contenu);
+
+    //     dd($session->get('contenu'));
+    // }
 
     /**
      * @Route("/{id}/edit", name="contenu_panier_edit", methods={"GET","POST"})

@@ -3,40 +3,27 @@
 {% block title %}Produits{% endblock %}
 
 {% block body %}
-    <h1>Liste des produits</h1>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Prix</th>
-                <th>Stock</th>
-                <th>Photo</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="bg-light p-3">
+        <h1>Les produits</h1>
+    </div>
+    <div class="row">
         {% for produit in produits %}
-            <tr>
-                <td>{{ produit.id }}</td>
-                <td><a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a></td>
-                <td>{{ produit.description }}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.stock }}</td>
-                <td>
-                    {% if produit.photo is not null %}
-                        <img src="{{ asset('public/images/' ~ produit.photo) }}">
-                    {% endif %}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">Aucun produit</td>
-            </tr>
+                    <div class="col-3 mt-3">
+                        <div class="border border-dark rounded p-1 clearfix">
+                                
+                            <h2><a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a>
+                            -
+                            {{produit.prix}}
+                            $
+                            </h2>
+                            <img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"> 
+                         </div>           
+                    </div>
+        {% else %}      
+                <div> colspan="7">Aucun produit</div>    
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
+    
     
     {# On peut ajouter un produit seulement si on est ADMIN #}
     {% if is_granted('ROLE_USER') %}

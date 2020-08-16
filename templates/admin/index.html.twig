@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!{% endblock %}
+
+{% block body %}
+<h1>Utilisateurs</h1>
+
+{% if users is not empty %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Email</th>
+                <th>Roles</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{user.email}}</td>
+                    <td>{{dump(user.roles)}}</td>
+                    <td>
+                        <a href="{{ path('editRole', {'id':user.id}) }}">EditRole</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Il n'y a aucun utilisateur</p>
+{% endif %}
+{% endblock %}

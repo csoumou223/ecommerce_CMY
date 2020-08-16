@@ -3,10 +3,21 @@
 {% block title %}Produit{% endblock %}
 
 {% block body %}
-    <h1>Produit</h1>
+    <div class="bg-light p-3">
+        <h1>Fiche du produit</h1>
+    </div>
 
     <table class="table">
         <tbody>
+            <tr>
+                
+                
+                <td> <img class="img-fluid rounded" src="{{asset('uploads/'~ produit.photo )}}"></td>
+                <a href="{{ path('contenu_panier_new', {'id':produit.id})}}" class="btn btn-success float-right">
+                        <i class="fas fa-shopping-cart mr-1"></i>
+                        Ajouter
+                </a>
+            </tr>
             <tr>
                 <th>Id</th>
                 <td>{{ produit.id }}</td>
@@ -27,10 +38,7 @@
                 <th>Stock</th>
                 <td>{{ produit.stock }}</td>
             </tr>
-            <tr>
-                <th>Photo</th>
-                <td>{{ produit.photo }}</td>
-            </tr>
+            
         </tbody>
     </table>
 
